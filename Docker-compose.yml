@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend/helloService
+      dockerfile: ../Dockerfile  # Dockerfile is one level up from helloService
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/helloService:/app
+    command: ["npm", "run", "dev"]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    command: ["npm", "start"]
